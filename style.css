@@ -1,116 +1,217 @@
-/* style.css */
 * {
+box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+  --primary: #aac7ff;
+  --surface: #111318;
+  --surface-container: #1d1f25;
+  --on-surface: #e3e2e9;
+  --on-surface-variant: #c4c6d0;
+  --shape-opacity: 100;
+}
+
+html,
+body {
+  min-width: 100%;
+  min-height: 100%;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 body {
-  background: #0a1128;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Google Sans', 'Google Sans Display', 'Roboto', sans-serif;
-  overflow-x: hidden;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--on-surface);
+  font-family: "Google Sans", sans-serif;
 }
 
-#snowCanvas {
+.shapes {
   position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.25;
+  width: 390px;
+  height: 390px;
+  opacity: var(--shape-opacity);
+  will-change: transform;
 }
 
-.container {
+.shape--three {
+  width: 280px;
+  height: 280px;
+}
+
+.shape--four {
+  width: 310px;
+  height: 310px;
+}
+
+.shape--five {
+  width: 380px;
+  height: 380px;
+}
+
+.hero {
   position: relative;
   z-index: 2;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
   text-align: center;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
 }
 
-.title {
-  font-family: 'Google Sans', 'Google Sans Display', 'Roboto', sans-serif;
+.hero__content {
+  width: min(720px, 100%);
+  transform: translateY(3vh);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: 0.98;
   font-weight: 500;
-  font-size: clamp(3rem, 10vw, 5.4rem);
-  color: white;
-  letter-spacing: -0.5px;
-  text-shadow: 0 4px 20px rgba(0, 20, 70, 0.7);
-  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+p {
+  max-width: 660px;
+  margin: 24px auto 0;
+  color: var(--on-surface-variant);
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+p a {
+  color: var(--primary);
+  text-underline-offset: 3px;
+}
+
+.dock {
+  position: fixed;
+  z-index: 5;
+  top: 20px;
+  right: 24px;
+  left: 24px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px 8px 24px;
+  border-radius: 32px;
+  background: var(--surface-container);
+}
+
+.brand {
+  color: var(--on-surface);
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  text-decoration: none;
 }
 
 .links {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 2.2rem;
-  row-gap: 1.8rem;
+  gap: 4px;
 }
 
-.link {
+.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  transition: transform 0.25s ease, filter 0.2s;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
-}
-
-.link:hover {
-  transform: translateY(-3px) scale(1.04);
-  filter: drop-shadow(0 10px 18px rgba(255, 255, 255, 0.15));
-}
-
-.icon {
-  width: 1.9rem;
-  height: 1.9rem;
-  fill: white;
-  display: block;
-}
-
-.ssn-logo {
-  font-family: 'Google Sans', 'Roboto', sans-serif;
-  font-weight: 400;
-  font-style: italic;
-  font-size: 1.5rem;
-  color: white;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px 0 12px;
+  color: var(--primary);
+  background-color: transparent;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.2rem;
-  height: 2.2rem;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  transition: text-shadow 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
 }
 
-.link:hover .ssn-logo {
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+.button svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  display: block;
+  color: currentColor;
+  fill: currentColor;
+  overflow: visible;
 }
 
-@media (max-width: 480px) {
+.button:hover {
+  background-color: rgba(170, 199, 255, 0.08);
+}
+
+.button:active {
+  background-color: rgba(170, 199, 255, 0.12);
+  transform: scale(0.97);
+}
+
+@media (max-width: 640px) {
+  .dock {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    min-height: 60px;
+    padding: 8px 10px;
+  }
+
+  .dock {
+    gap: 8px;
+  }
+
+  .brand {
+    flex: 0 0 auto;
+    font-size: 20px;
+    letter-spacing: -0.04em;
+  }
+
   .links {
-    gap: 1.8rem;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    gap: 0;
+    min-width: 0;
   }
-  
-  .icon {
-    width: 2rem;
-    height: 2rem;
+
+  .button {
+    flex: 0 1 auto;
+    font-size: 11px;
+    padding: 0 7px;
+    gap: 5px;
+    height: 36px;
   }
-  
-  .ssn-logo {
-    font-size: 1.7rem;
-    width: 2.4rem;
-    height: 2.4rem;
+
+  .button svg {
+    width: 16px;
+    height: 16px;
+    flex-basis: 16px;
+  }
+
+  .hero {
+    padding: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shape {
+    display: none;
   }
 }
