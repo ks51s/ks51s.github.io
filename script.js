@@ -54,3 +54,7 @@ shapes.forEach((shape, index) => {
 
   setTimeout(() => move(shape), 150 + index * 350 + randomBetween(0, 500));
 });
+
+
+const ycloudBanner = document.querySelector('.ycloud-banner');
+

@@ -21,7 +21,8 @@ body {
 
 body {
   min-height: 100svh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
   background: var(--surface);
   color: var(--on-surface);
   font-family: "Google Sans", sans-serif;
@@ -214,4 +215,93 @@ p a {
   .shape {
     display: none;
   }
+}
+
+
+.site-footer {
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 20px;
+  pointer-events: none;
+}
+
+.site-footer .ycloud-banner {
+  pointer-events: auto;
+}
+
+.ycloud-banner {
+  display: inline-flex;
+  border-radius: 12px;
+  line-height: 0;
+  transition: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ycloud-banner img {
+  display: block;
+  width: 150px;
+  height: auto;
+  max-width: 100%;
+}
+
+.ycloud-banner:hover,
+.ycloud-banner:focus-visible,
+.ycloud-banner.is-glowing,
+.ycloud-banner:active {
+  filter: none;
+  transform: none;
+}
+
+.ycloud-banner:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ycloud-banner {
+    transition: none;
+  }
+}
+
+.shape--frame {
+  width: 390px;
+  height: 390px;
+  object-fit: contain;
+}
+
+
+/* Mobile layout improvements */
+html { -webkit-text-size-adjust: 100%; }
+body { overflow-x: clip; }
+button, a { touch-action: manipulation; }
+@media (max-width: 480px) {
+  .dock { top: max(10px, env(safe-area-inset-top)); left: 10px; right: 10px; padding: 8px 9px 8px 14px; min-height: 54px; border-radius: 27px; gap: 6px; }
+  .brand { font-size: 18px; }
+  .links { gap: 0; }
+  .button { height: 38px; padding: 0 7px; gap: 4px; font-size: 11px; }
+  .button svg { width: 15px; height: 15px; flex-basis: 15px; }
+  .hero { padding: 76px 18px 88px; min-height: 100svh; }
+  .hero__content { width: 100%; transform: translateY(0); }
+  h1 { font-size: clamp(34px, 9vw, 46px); line-height: 1.02; overflow-wrap: anywhere; }
+  p { margin-top: 18px; font-size: 16px; line-height: 1.5; }
+  .site-footer { bottom: max(8px, env(safe-area-inset-bottom)); padding: 6px 12px; }
+  .ycloud-banner img { width: 128px; }
+  .shape, .shape--frame { width: min(76vw, 300px); height: min(76vw, 300px); }
+  .shape--three { width: min(58vw, 230px); height: min(58vw, 230px); }
+  .shape--four { width: min(64vw, 250px); height: min(64vw, 250px); }
+}
+@media (max-width: 350px) {
+  .brand { font-size: 16px; }
+  .button { padding: 0 5px; font-size: 10px; }
+  .button svg { width: 14px; height: 14px; flex-basis: 14px; }
+  h1 { font-size: 32px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
